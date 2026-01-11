@@ -33,7 +33,7 @@ export enum AnthemReceiverModel {
   AVM90 = 'AVM 90'
 }
 
-export enum AnthemAudioListenningMode {
+export enum AnthemAudioListeningMode {
   NONE = 0,
   ANTHEMLOGIC_CINEMA = 1,
   ANTHEMLOGIC_MUSIC = 2,
@@ -144,7 +144,7 @@ export enum AnthemKeyCode {
   }
 
 export class AnthemZone{
-  ZoneNumber = 1;
+  ZoneNumber = 0;
   private IsMainZone = false;
   private IsMuted = false;
   private ARCConfigured = true;
@@ -154,7 +154,7 @@ export class AnthemZone{
   private PowerConfigured = false;
   private VolumePercentage = 0;
   private Volume = 0;
-  private AudioListenningMode = AnthemAudioListenningMode.NONE;
+  private AudioListeningMode = AnthemAudioListeningMode.NONE;
   ZoneName = '';
 
   constructor(ZoneNumber: number, ZoneName: string, IsMainZone: boolean) {
@@ -228,12 +228,12 @@ export class AnthemZone{
     return this.PowerConfigured;
   }
 
-  SetALM(AudioListenningMode:number){
-    this.AudioListenningMode = AudioListenningMode;
+  SetALM(AudioListeningMode:number){
+    this.AudioListeningMode = AudioListeningMode;
   }
 
   GetALM():number{
-    return this.AudioListenningMode;
+    return this.AudioListeningMode;
   }
 }
 
@@ -1175,10 +1175,9 @@ export class AnthemController extends TypedEmitter<AnthemControllerEvent> {
             for(let i = 0 ; i < Response.length-2; i++){
               if(TempString.substring(i, i+2) === 'IN'){
                 const InputNumber = Number(TempString.substring(0, i));
-                const Name = TempString.substring(i+2, TempString.length);
-
+                let Name = TempString.substring(i+2, TempString.length);
+                Name = this.ReceiverModel == AnthemReceiverModel.MRXSLM ? Buffer.from(Name, 'hex').toString() : Name;
                 this.InputNameArray[InputNumber-1] = Name;
-
                 if(this.CurrentState === ControllerState.Operation){
                   if(InputNumber === this.InputNameArray.length){
                     if(this.GetInputHasChange()){

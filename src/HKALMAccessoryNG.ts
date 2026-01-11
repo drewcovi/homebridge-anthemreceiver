@@ -13,7 +13,7 @@ export class HKALMAccessoryNG extends HKAccessory {
       Controller,
       'Zone' + ZoneNumber + ' ALM', // Name
       Controller.SerialNumber + ZoneNumber + 'ALM NG'); // UUID
-    this.platform.log.info('Zone' + ZoneNumber + ': Audio Listenning Mode');
+    this.platform.log.info('Zone' + ZoneNumber + ': Audio Listening Mode');
 
     // set accessory information
     this.Accessory.getService(this.platform.Service.AccessoryInformation)!

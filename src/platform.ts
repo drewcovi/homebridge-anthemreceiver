@@ -126,7 +126,7 @@ export class AnthemReceiverHomebridgePlatform implements DynamicPlatformPlugin {
   discoverDevices() {
 
     this.log.info('-----------------------------------------');
-    this.log.info('Configuring Hombebridge Accessories');
+    this.log.info('Configuring Homebridge Accessories');
     this.log.info('-----------------------------------------');
 
     const Inputs = this.Controller.GetInputs();
@@ -134,7 +134,6 @@ export class AnthemReceiverHomebridgePlatform implements DynamicPlatformPlugin {
     if(this.PanelBrightness){
       this.AddBrightnessAccessory();
     }
-
     if(this.Zone1Active){
       const AnthemReceiver = new HKPowerInputAccessory(this, this.Controller, 1);
       this.AnthemReceiverPowerInputArray.push(AnthemReceiver);
