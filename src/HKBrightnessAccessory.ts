@@ -62,8 +62,8 @@ export class HKBrightnessAccessory extends HKAccessory {
   }
 
   AllZonesOff(){
-    this.platform.log.info('zones length: ', this.Controller.GetConfiguredZoneNumber());
-    return this.Controller.GetConfiguredZoneNumber() > 1 ? !this.Controller.GetZonePower(1) && !this.Controller.GetZonePower(2) : !this.Controller.GetZonePower(1);
+    let isSLM = this.Controller.ReceiverModel == 'MRX SLM';
+    return isSLM ? !this.Controller.GetZonePower(1) && !this.Controller.GetZonePower(2) : !this.Controller.GetZonePower(1);
   }
 
   SetPanelOn(value){
